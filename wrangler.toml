@@ -1,5 +1,5 @@
 #:schema node_modules/wrangler/config-schema.json
-name = "nuxt-workers"
+name = "nuxt-n2"
 compatibility_date = "2025-01-09"
 main = "./.output/server/index.mjs"
 assets = { directory = "./.output/public/", binding = "ASSETS" }
