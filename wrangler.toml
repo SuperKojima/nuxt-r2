@@ -9,3 +9,7 @@ assets = { directory = "./.output/public/", binding = "ASSETS" }
 # Configuration: https://developers.cloudflare.com/workers/observability/logs/workers-logs/#enable-workers-logs
 [observability]
 enabled = true
+
+[[r2_buckets]]
+bucket_name = "nuxt-r2"
+binding = "R2"
