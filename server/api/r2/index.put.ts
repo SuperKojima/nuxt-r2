@@ -32,7 +32,7 @@ export default defineEventHandler(async (event) => {
         const extension = getExtensionFromType(part?.type);
         if (!extension) continue;
         const key = `${uuidv4()}.${extension}`;
-        await r2.put(key, new Uint8Array(part.data.buffer));
+        await r2.put(key, new Uint8Array(part.data.buffer)); // h3のBuffer<ArrayBufferLike>を変換しないとエラーになる
         hasImage = true;
     }
 
