@@ -11,7 +11,7 @@ const upload = async (e: Event) => {
 
 <template>
   <div>
-    <h2 class="mb-4">/upload</h2>
+    <h2 class="mb-4">/upload/v1</h2>
     <div>
       <form @submit.prevent="upload" class="space-y-4">
         <div>
