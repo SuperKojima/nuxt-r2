@@ -5,7 +5,7 @@ export default defineEventHandler(async (event) => {
     await r2.delete(key);
 
     return {
-        message: '削除しました',
+        message: 'deleted',
         key: key
     }
 })

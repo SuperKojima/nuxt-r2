@@ -1,5 +1,7 @@
 <script setup lang="ts">
-const { data, status, refresh } = await useFetch('/api/r2/list');
+const { data, status, refresh } = await useFetch('/api/r2', {
+    method: 'GET',
+});
 
 const deleteItem = async (key: string) => {
     const response = await $fetch(`/api/r2`, {
@@ -8,35 +10,28 @@ const deleteItem = async (key: string) => {
             key
         }
     });
-    console.log(response);
     refresh();
 }
 </script>
 
 <template>
   <div>
-    <h2 class="mb-4">/</h2>
-    <nav class="mb-4">
-        <ul class="flex gap-4">
-            <li>
-                <NuxtLink to="/upload/v1" class="bg-blue-500 text-white p-2 rounded-md">upload v1</NuxtLink>
-            </li>
-            <li>
-                <NuxtLink to="/upload/v2" class="bg-blue-500 text-white p-2 rounded-md">upload v2</NuxtLink>
-            </li>
-        </ul>
-    </nav>
-    <ul class="grid gap-2">
+    <div class="mb-6">
+        <NuxtLink to="/upload" class="bg-blue-500 text-white p-2 rounded-md">
+            Upload Images
+        </NuxtLink>
+    </div>
+    <ul class="grid grid-cols-2 gap-4 mb-10">
         <li v-for="item in data?.objects" :key="item.key" class="bg-gray-100 p-4">
-            <div>
+            <button @click="deleteItem(item.key)" class="bg-red-500 text-white p-1 rounded-md text-sm">
+                Delete
+            </button>
+            <div class="text-sm text-gray-500">
                 {{ item.key }}
             </div>
             <div>
                 <img :src="`/assets/${item.key}`" :alt="item.key" width="200" height="auto">
             </div>
-            <button @click="deleteItem(item.key)">
-                削除
-            </button>
         </li>
     </ul>
   </div>

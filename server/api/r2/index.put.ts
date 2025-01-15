@@ -9,8 +9,6 @@ export default defineEventHandler(async (event) => {
         })
     }
 
-    let hasAnyFile = false;
-
     const getExtensionFromType = (type: string | undefined) => {
         switch (type) {
             case 'image/jpeg':
@@ -28,13 +26,21 @@ export default defineEventHandler(async (event) => {
 
     const r2 = event.context.cloudflare.env.R2;
 
+    let hasImage = false;
+
     for (const part of form) {
-        // 画像ファイルのみを処理
         const extension = getExtensionFromType(part?.type);
         if (!extension) continue;
         const key = `${uuidv4()}.${extension}`;
-        const file = await r2.put(key, new Uint8Array(part.data.buffer));
-        console.log({file});
+        await r2.put(key, new Uint8Array(part.data.buffer));
+        hasImage = true;
+    }
+
+    if (!hasImage) {
+        throw createError({
+            statusCode: 400,
+            statusMessage: 'No image found'
+        })
     }
 
     return {
