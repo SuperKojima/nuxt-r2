@@ -1,7 +1,7 @@
 <script setup lang="ts">
 const upload = async (e: Event) => {
   const formData = new FormData(e.target as HTMLFormElement);
-    const response = await $fetch('/api/r2', {
+    const response = await $fetch('/api/r2/v1', {
       method: 'PUT',
       body: formData
     });
