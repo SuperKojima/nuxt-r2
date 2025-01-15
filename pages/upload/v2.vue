@@ -1,11 +1,11 @@
 <script setup lang="ts">
 const upload = async (e: Event) => {
   const formData = new FormData(e.target as HTMLFormElement);
-    const response = await $fetch('/api/r2', {
-      method: 'PUT',
-      body: formData
-    });
-    console.log(response);
+  const response = await $fetch('/api/r2/v2', {
+    method: 'PUT',
+    body: formData
+  });
+  console.log(response);
 };
 </script>
 
@@ -13,13 +13,25 @@ const upload = async (e: Event) => {
   <div>
     <h2 class="mb-4">/upload/v2</h2>
     <div>
-      <form @submit.prevent="upload" class="space-y-4">
+      <form
+        @submit.prevent="upload"
+        enctype="multipart/form-data"
+        class="space-y-4">
         <div>
           <input 
-            type="file" 
-            name="image"
+            type="text"
+            name="name"
+            class="border border-gray-300 rounded-md p-2"
+            placeholder="name"
+          />
+        </div>
+        <div>
+          <input 
+            type="file"
+            multiple
+            name="images"
             accept="image/*"
-            class="block w-full" 
+            class="block w-full"
           />
         </div>
 
