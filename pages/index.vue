@@ -2,7 +2,7 @@
 </script>
 
 <template>
-  <div class="p-4">
-    <NuxtPage />
+  <div>
+    index
   </div>
 </template>
